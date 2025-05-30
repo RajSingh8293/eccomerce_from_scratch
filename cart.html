@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      #userGreeting {
+        display: none;
+      }
+      #logout-btn {
+        display: none;
+      }
+      #login-btn {
+        display: inline;
+      }
+      #register-btn {
+        display: inline;
+      }
+
+      .cart-remove-btn {
+        background-color: red;
+        padding: 5px 8px;
+        font-size: 14px;
+      }
+      .empty-cart-msg {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 20px 0;
+      }
+      .cart {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .cart-cantainer {
+        height: 100%;
+      }
+      .cart-cantainer h1 {
+        text-align: center;
+        margin-top: 40px;
+        color: #333;
+      }
+
+      .cartMainContainer {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+      }
+      .cart-cantainer .cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #ddd;
+        padding: 20px 0;
+      }
+
+      .cart-cantainer .cart-item img {
+        width: 80px;
+        border-radius: 8px;
+      }
+
+      .container .cart-details {
+        flex: 1;
+        margin-left: 20px;
+      }
+
+      .cart-cantainer .cart-details p {
+        margin: 4px 0;
+      }
+
+      .cart-cantainer .totalAmount {
+        text-align: right;
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .cart-cantainer .empty-message {
+        text-align: center;
+        color: #888;
+        font-size: 18px;
+        padding: 40px;
+      }
+
+      .cartMainContainer .checkout-card button {
+        margin-top: 0.5rem;
+        padding: 0.5rem 1rem;
+        color: #fff;
+        background: #28a745;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      .cartMainContainer .checkout-card button a {
+        text-decoration: none;
+        color: #fff;
+        display: block;
+      }
+
+      .checkout-card {
+        width: 100%;
+        height: fit-content;
+        margin: 0px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .checkout-card h2 {
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .summary-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        margin: 15px 0;
+      }
+      .summary-line .checkout-price {
+        font-size: 1.3rem;
+      }
+
+      .checkout-card .checkout-btn {
+        background: #217b33;
+      }
+      .checkout-card .checkout-btn:hover {
+        background: #218838;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">FASHION</div>
+
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="auth-icon">
+        <div>
+          <button class="btn authBtn" id="userGreeting"></button>
+          <button class="btn authBtn" id="login-btn">
+            <a href="login.html">Login</a>
+          </button>
+          <button class="btn authBtn" id="register-btn">
+            <a href="register.html">Register</a>
+          </button>
+          <button class="btn authBtn" id="logout-btn" onclick="logout()">
+            Logout
+          </button>
+        </div>
+        <div class="icons">
+          <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+          <a href="cart.html" class="cart-icon">
+            <img
+              src="https://img.icons8.com/ios-filled/24/shopping-bag.png"
+              alt="Cart"
+            />
+            <span class="cart-count" id="cartCount">0</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container cart-cantainer">
+      <h1>Your Shopping Cart</h1>
+      <div class="cart">
+        <div>
+          <div id="cartContainer"></div>
+          <div id="totalAmount" class="totalAmount"></div>
+        </div>
+        <div class="checkout-card">
+          <h2>Order Summary</h2>
+          <hr />
+          <div class="summary-line">
+            <span class="checkout-price">Total:</span>
+            <span class="checkout-price" id="checkoutTotalAmount">$0.00</span>
+          </div>
+          <button class="checkout-btn btn">
+            <a href="checkout.html">Proceed to Checkout</a>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="container site-footer">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>About FASHION</h4>
+          <p>
+            Your brand's story, values, and mission go here. You can add more
+            about your services too.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">FAQs</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Your Brand. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="navbar.js"></script>
+    <script src="userdata.js"></script>
+    <script>
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartContainer = document.getElementById("cartContainer");
+      const totalAmount = document.getElementById("totalAmount");
+      const checkoutTotalAmount = document.getElementById(
+        "checkoutTotalAmount"
+      );
+
+      let total = 0;
+      console.log("total :", total);
+      cart.forEach((item) => {
+        total += item.price * item.quantity;
+      });
+      totalAmount.innerHTML = `Total : $${total}`;
+      checkoutTotalAmount.innerText = `$${total}`;
+      cartContainer.innerHTML = "";
+      if (cart.length === 0) {
+        cartContainer.innerHTML = `
+        <div class="empty-cart-msg">
+        <p class='empty-msg'>Your cart is empty.</p>
+          <a href="shop.html">Go back</a>
+          </div>
+          `;
+        totalAmount.innerHTML = "";
+      }
+      cart.forEach((item) => {
+        const createDiv = document.createElement("div");
+        createDiv.classList.add("cart-item");
+        createDiv.innerHTML = `
+        <img src="${item.images[0]}" alt="${item.name}">
+        <div class="cart-details">
+           <p>${item.name}</p>
+           <p><strong>Price</strong>: <span>$${item.price}</span></p>
+           <p>Quantity: ${item.quantity}</p>
+           <p class="price">Total: <strong>$${(
+             item.price * item.quantity
+           ).toFixed(2)}</strong></p>
+           <button class="btn cart-remove-btn" onclick="removerFromCart(${
+             item.id
+           })">remove</button>
+          </div>
+        `;
+        cartContainer.appendChild(createDiv);
+      });
+
+      function removerFromCart(id) {
+        if (confirm("Are you sure you want to remove product?")) {
+          const updatedCart = cart.filter((item) => item.id !== id);
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
+        }
+      }
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartCount = document.getElementById("cartCount");
+        if (cartCount) {
+          cartCount.textContent = totalItems;
+        }
+      }
+
+      updateCartCount();
+    </script>
+  </body>
+</html>
