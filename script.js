@@ -89,11 +89,13 @@ function generateCategoryButtons(data) {
       <button class="filter-btn ${
         cat === "all" ? "active" : ""
       }" data-category="${cat}">
-        ${cat.charAt(0).toUpperCase() + cat.slice(1)}
+         ${cat}
       </button>
     `
     )
     .join("");
+  // above category btn's text make capitalize using javascript or css
+  // ${cat.charAt(0).toUpperCase() + cat.slice(1)}
 
   // Add event listeners
   const buttons = filterContainer.querySelectorAll(".filter-btn");
