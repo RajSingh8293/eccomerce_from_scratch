@@ -23,80 +23,114 @@
       }
 
       /* produc deatail  */
-      .container .product-detail-card {
+
+      .product-detail-card {
         display: flex;
         flex-wrap: wrap;
-        gap: 30px;
-        background: #fff;
+        gap: 24px;
+        max-width: 1200px;
+        margin: 20px auto;
         padding: 20px;
-        margin: 40px auto;
+        border: 1px solid #ddd;
         border-radius: 12px;
-        max-width: 1000px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
 
-      .product-detail-card .image-column {
-        flex: 1;
-        min-width: 300px;
+      .image-column {
+        flex: 1 1 350px;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
-      .product-detail-card .image-column img {
+      .main-image {
         width: 100%;
-        border-radius: 12px;
-        object-fit: cover;
+        max-width: 400px;
+        max-height: 400px;
+        height: auto;
+        border-radius: 10px;
+        object-fit: contain;
+        margin-bottom: 12px;
+        /* border: 1px solid #ccc; */
       }
 
-      .product-detail-card .info-column {
-        flex: 2;
-        min-width: 300px;
-      }
-
-      .product-detail-card .info-column .price {
-        color: #28a745;
-        margin: 10px 0;
-      }
-
-      .product-detail-card .info-column button {
-        background: #28a745;
-        color: white;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-      }
-
-      .product-detail-card .info-column button:hover {
-        background: #218838;
-      }
-
-      /* image  */
-      .product-detail-card .image-column {
-        margin-bottom: 10px;
-        flex: 1;
-        min-width: 300px;
-      }
-
-      .product-detail-card .thumbnails {
+      .thumbnails {
         display: flex;
         gap: 10px;
+        flex-wrap: wrap;
         justify-content: center;
-        justify-items: center;
-        margin-top: 10px;
-      }
-      .product-detail-card .thumbnails img {
-        width: 50px;
       }
 
-      .product-detail-card .thumbnail {
+      .thumbnails img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border: 2px solid transparent;
+        border-radius: 6px;
         cursor: pointer;
-        border: 1px solid transparent;
-        border-radius: 10px;
-        overflow: hidden;
+        transition: border 0.3s;
       }
 
-      .product-detail-card .thumbnail:hover {
+      .thumbnails img:hover,
+      .thumbnails img.active {
         border-color: #111;
+      }
+
+      .info-column {
+        flex: 1 1 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .price {
+        color: #28a745;
+      }
+
+      .product-detail-card button {
+        margin-top: 10px;
+        color: white;
+        font-size: 16px;
+        padding: 12px;
+        background: #28a745;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .add-to-cart-btn:hover {
+        background: #25c94b;
+      }
+
+      .related-product h3 {
+        margin-bottom: 20px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .product-detail-card {
+          flex-direction: column;
+          padding: 16px;
+        }
+
+        .image-column,
+        .info-column {
+          width: 100%;
+          max-width: 100%;
+        }
+
+        .main-image {
+          max-width: 100%;
+        }
+      }
+      @media (max-width: 528px) {
+        .product-detail-card {
+          flex-direction: column;
+          padding: 16px;
+        }
       }
     </style>
   </head>
@@ -111,16 +145,27 @@
       </div>
 
       <div class="auth-icon">
+        <div class="user-menu-container" id="userMenu">
+          <button id="userMenuButton" class="user-avatar">
+            <img src="https://i.pravatar.cc/40" alt="User Avatar" />
+          </button>
+          <div id="userDropdown" class="user-dropdown hidden">
+            <button class="btn authBtn" id="userGreeting"></button>
+            <a class="btn" href="myorders.html">Orders</a>
+            <a class="btn" href="#">Profile</a>
+            <a class="btn" href="#">Settings</a>
+            <button class="btn" id="logout-btn" onclick="logout()">
+              Logout
+            </button>
+          </div>
+        </div>
+
         <div>
-          <button class="btn authBtn" id="userGreeting"></button>
           <button class="btn authBtn" id="login-btn">
             <a href="login.html">Login</a>
           </button>
           <button class="btn authBtn" id="register-btn">
             <a href="register.html">Register</a>
-          </button>
-          <button class="btn authBtn" id="logout-btn" onclick="logout()">
-            Logout
           </button>
         </div>
         <div class="icons">
@@ -179,10 +224,8 @@
     </footer>
 
     <script src="products.js"></script>
-    <script src="script.js"></script>
     <script src="addToCart.js"></script>
     <script src="navbar.js"></script>
-    <script src="userdata.js"></script>
 
     <script>
       function getSlugFromURL() {
@@ -216,7 +259,7 @@
           product.numReviews
         } reviews)</p>
         <p><strong>Stock:</strong> ${product.countInStock}</p>
-         <button class="add-to-cart-btn" data-id="${
+         <button class="add-to-cart-btn " data-id="${
            product.slug
          }">Add to Cart</button>
       </div>

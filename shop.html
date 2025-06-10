@@ -31,12 +31,14 @@
         background-color: #f8f8f8;
         border-radius: 8px;
         max-width: 300px;
+        /* width: 250px;
+        width: 20%; */
         margin-bottom: 20px;
         transition: transform 0.3s ease;
         height: fit-content;
-        position: sticky;
-        top: 100px;
-        left: 0;
+        /* position: fixed;
+        top: 80px;
+        left: 10px; */
       }
       .filters.hidden {
         transform: translateX(-100%);
@@ -99,6 +101,10 @@
         background: #e04848;
       }
 
+      .productsContainer {
+        width: 80%;
+      }
+
       .filterAndSort {
         display: flex;
         justify-content: end;
@@ -145,19 +151,13 @@
         justify-content: center;
       }
 
-      /* .product-card {
-        width: 100%;
-      } */
-
       .product-container-grid {
-        /* display: flex;
-        flex-wrap: wrap;
-        justify-content: center; */
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         justify-content: center;
-        gap: 10px;
-        width: 100%;
+        gap: 1rem;
+        /* width: 100%; */
+        flex: 1;
       }
 
       .pagination {
@@ -184,14 +184,46 @@
         cursor: default;
       }
 
-      @media (max-width: 1320px) {
-        .product-container-grid {
-          grid-template-columns: 1fr 1fr 1fr;
+      @media (max-width: 1330px) {
+        .productsContainer {
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+        }
+        .filters {
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 100vh;
+          width: 250px;
+          z-index: 999;
+          padding: 30px 20px;
+          background-color: #f5f5f5;
+          transform: translateX(-100%);
+          overflow-y: auto;
+          border: none;
+          border-radius: none;
+        }
+        .filters::-webkit-scrollbar {
+          display: none;
+        }
+        .filters.show {
+          transform: translateX(0);
+        }
+        .close-btn,
+        .filter-icon-btn {
+          display: block;
+        }
+        .filterAndSort {
+          justify-content: space-between;
         }
       }
 
       @media (max-width: 1070px) {
-        .filters {
+        /* .filters {
           position: fixed;
           top: 0;
           left: 0;
@@ -217,19 +249,28 @@
         }
         .filterAndSort {
           justify-content: space-between;
-        }
+        } */
 
+        .productsContainer {
+          width: 100%;
+        }
         .product-container-grid {
           grid-template-columns: 1fr 1fr 1fr;
         }
       }
 
       @media (max-width: 768px) {
+        .productsContainer {
+          width: 100%;
+        }
         .product-container-grid {
           grid-template-columns: 1fr 1fr;
         }
       }
       @media (max-width: 555px) {
+        .productsContainer {
+          width: 100%;
+        }
         .product-container-grid {
           grid-template-columns: 1fr;
         }
@@ -247,16 +288,27 @@
       </div>
 
       <div class="auth-icon">
+        <div class="user-menu-container" id="userMenu">
+          <button id="userMenuButton" class="user-avatar">
+            <img src="https://i.pravatar.cc/40" alt="User Avatar" />
+          </button>
+          <div id="userDropdown" class="user-dropdown hidden">
+            <button class="btn authBtn" id="userGreeting"></button>
+            <a class="btn" href="myorders.html">Orders</a>
+            <a class="btn" href="#">Profile</a>
+            <a class="btn" href="#">Settings</a>
+            <button class="btn" id="logout-btn" onclick="logout()">
+              Logout
+            </button>
+          </div>
+        </div>
+
         <div>
-          <button class="btn authBtn" id="userGreeting"></button>
           <button class="btn authBtn" id="login-btn">
             <a href="login.html">Login</a>
           </button>
           <button class="btn authBtn" id="register-btn">
             <a href="register.html">Register</a>
-          </button>
-          <button class="btn authBtn" id="logout-btn" onclick="logout()">
-            Logout
           </button>
         </div>
         <div class="icons">
@@ -314,7 +366,7 @@
         </div>
       </aside>
 
-      <div>
+      <div class="productsContainer">
         <div class="">
           <div class="filterAndSort">
             <button id="toggleFilter" class="btn filter-icon-btn">
@@ -379,7 +431,7 @@
     <script src="products.js"></script>
     <script src="navbar.js"></script>
     <script src="addToCart.js"></script>
-    <script src="userdata.js"></script>
+
     <!-- Your product data file -->
     <script>
       const toggleFilter = document.getElementById("toggleFilter");

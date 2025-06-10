@@ -35,16 +35,27 @@
       </div>
 
       <div class="auth-icon">
+        <div class="user-menu-container" id="userMenu">
+          <button id="userMenuButton" class="user-avatar">
+            <img src="https://i.pravatar.cc/40" alt="User Avatar" />
+          </button>
+          <div id="userDropdown" class="user-dropdown hidden">
+            <button class="btn authBtn" id="userGreeting"></button>
+            <a class="btn" href="myorders.html">Orders</a>
+            <a class="btn" href="#">Profile</a>
+            <a class="btn" href="#">Settings</a>
+            <button class="btn" id="logout-btn" onclick="logout()">
+              Logout
+            </button>
+          </div>
+        </div>
+
         <div>
-          <button class="btn authBtn" id="userGreeting"></button>
           <button class="btn authBtn" id="login-btn">
             <a href="login.html">Login</a>
           </button>
           <button class="btn authBtn" id="register-btn">
             <a href="register.html">Register</a>
-          </button>
-          <button class="btn authBtn" id="logout-btn" onclick="logout()">
-            Logout
           </button>
         </div>
         <div class="icons">
@@ -59,6 +70,7 @@
         </div>
       </div>
     </nav>
+
     <div class="carousel">
       <div class="slides-wrapper">
         <div class="slides">
@@ -164,7 +176,6 @@
     <script src="script.js"></script>
     <script src="navbar.js"></script>
     <script src="addToCart.js"></script>
-    <script src="userdata.js"></script>
     <script>
       function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
